@@ -2,10 +2,10 @@ import socket
 from _thread import *
 import sys
 import pickle
-from blockclass import block
-from game import player
+from Block import block
+from Player import player
 
-server = "192.168.100.10"#"192.168.100.23"
+server = "192.168.100.23"#"192.168.100.23"192.168.100.10
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
