@@ -4,8 +4,8 @@ import pygame
 import tkinter as tk
 from tkinter import messagebox
 from network import Network
-from blockclass import block
-from game import player
+from Block import block
+from Player import player
 
 clientNumber = 0
 

@@ -4,7 +4,7 @@ import pygame
 import tkinter as tk
 from tkinter import messagebox
 from network import Network
-from blockclass import block
+from Block import block
 
 class player(object):
     # playerBody = []
