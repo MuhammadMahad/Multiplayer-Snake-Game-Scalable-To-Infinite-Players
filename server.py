@@ -5,7 +5,7 @@ import pickle
 from Block import block
 from Player import player
 
-server = "192.168.100.23"#"192.168.100.23"192.168.100.10
+server = "192.168.100.8"#"192.168.100.23"192.168.100.10
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,13 +21,16 @@ print("Waiting for a connection, Server Started")
 
 players = [player((10,10), (244, 238, 238)), player((11,11), (58, 55, 47))]
 
-def displayScoreAndResetPlayer(p):
+# def displayScoreAndResetPlayer(p):
+#
+#     Score = len(p.playerBody)
+#     # print('Score: ', len(p.playerBody))
+#
+#     notificationBox('You Lost!', 'Your Score was ' + str(Score) + '. Play again?')
+#     p.resetPlayer((10, 10))
 
-    Score = len(p.playerBody)
-    # print('Score: ', len(p.playerBody))
 
-    notificationBox('You Lost!', 'Your Score was ' + str(Score) + '. Play again?')
-    p.resetPlayer((10, 10))
+
 
 
 
@@ -50,12 +53,7 @@ def threaded_client(conn, player):
                     reply = players[0]
                 elif player == 0:
                     reply = players[1]
-                elif player == 1 and players[player].lose == True:
-                    reply = player((10,10), (244, 238, 238))
-                    #reply = players[0]
-                elif player == 0 and players[player].lose == True:
-                    reply = player((11,11), (244, 238, 238))
-                    #reply = players[1]
+
 
 
 

@@ -22,8 +22,8 @@ class player(object):
 
         self.dx = 0
         self.dy = 1
+        self.eventType = ""
 
-        self.lose = False
 
 
     def getPos(self):
@@ -68,15 +68,15 @@ class player(object):
             blockpos = block.position[:]
             if block.dx == -1 and block.position[0] < 0:
                 #displayScoreAndResetPlayer(self)
-                self.lose = True
+                self.eventType = "death"
             elif block.dx == 1 and block.position[0] > block.gridRows - 1:
-                self.lose = True
+                self.eventType = "death"
                 #displayScoreAndResetPlayer(self)
             elif block.dy == 1 and block.position[1] > block.gridRows - 1:
-                self.lose = True
+                self.eventType = "death"
                 #displayScoreAndResetPlayer(self)
             elif block.dy == -1 and block.position[1] < 0:
-                self.lose = True
+                self.eventType = "death"
                 #displayScoreAndResetPlayer(self)
             # else:
             #     return True
@@ -150,7 +150,7 @@ class player(object):
     def snakeCollisionWithItself(self):
         for x in range(len(self.playerBody)):
             if self.playerBody[x].position in list(map(lambda z: z.position, self.playerBody[x + 1:])):
-                self.lose = True
+                self.eventType = "death"
                 #displayScoreAndResetPlayer(self)
                 break
 

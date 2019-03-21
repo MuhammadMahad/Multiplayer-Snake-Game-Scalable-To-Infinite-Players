@@ -49,7 +49,15 @@ def notificationBox(subject, content):
 #     notificationBox('You Lost!', 'Your Score was ' + str(Score) + '. Play again?')
 #     p.resetPlayer((10, 10))
 
+def displayScoreAndQuit(p):
+    global gameRunning
+    if(p.eventType == "death"):
+        Score = len(p.playerBody)
+        # print('Score: ', len(p.playerBody))
 
+        notificationBox('You Lost!', 'Your Score was ' + str(Score) + '. Play again?')
+        gameRunning = False
+        #p.resetPlayer((10, 10))
 
 
 
@@ -71,8 +79,10 @@ def generateGrid(screenWidth, gridRows, screenSurface):
 
 def RerenderWindow(screenSurface, screenColor, screenWidth, gridRows, p, p2):
     screenSurface.fill(screenColor)
-    p.drawPlayer(screenSurface)
-    p2.drawPlayer(screenSurface)
+    if(p.eventType != "death"):
+        p.drawPlayer(screenSurface)
+    if(p2.eventType != "death"):
+        p2.drawPlayer(screenSurface)
     #food.drawBlock(screenSurface)
     generateGrid(screenWidth, gridRows, screenSurface)
     pygame.display.update()
@@ -80,7 +90,7 @@ def RerenderWindow(screenSurface, screenColor, screenWidth, gridRows, p, p2):
 #gameWindow = screenSurface they are the same thing i.e the application window
 
 def main():
-
+    global gameRunning
     pygame.init()
     screenWidth = 500
     screenHeight = 500
@@ -91,8 +101,8 @@ def main():
     pygame.display.set_caption('Client')
 
 
-    playerColor = (244, 238, 238)
-    intialPlayerPosition = (10,10)
+    # playerColor = (244, 238, 238)
+    # intialPlayerPosition = (10,10)
 
     n = Network()
     p = n.getP()
@@ -114,11 +124,12 @@ def main():
             #food = block(generateRandomFood(gridRows, p), blockColor=(253, 152, 90))
         p.snakeCollisionWithItself()
         p.borderCollision()
+
         #print(p.getPos())
         #print(p2.getPos())
 
         RerenderWindow(gameWindow, screenColor, screenWidth, gridRows, p, p2) #removed food
-
+        displayScoreAndQuit(p)
 
 
 main()
